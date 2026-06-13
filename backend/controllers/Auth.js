@@ -53,3 +53,11 @@ exports.resendOtp = async (req, res) => {
     });
   }
 };
+console.log({
+  signup: typeof exports.signup,
+  login: typeof exports.login,
+  verifyOtp: typeof exports.verifyOtp,
+  resendOtp: typeof exports.resendOtp,
+  forgotPassword: typeof exports.forgotPassword,
+  resetPassword: typeof exports.resetPassword,
+});
