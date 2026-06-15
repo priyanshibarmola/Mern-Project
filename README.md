@@ -94,10 +94,11 @@ Make sure you have the following installed:
 ---
 
 ## 📥 Clone the Repository
-
+```
 bash
 git clone https://github.com/your-username/mern-ecommerce.git
 cd mern-ecommerce
+```
 
 ## 📦 Install Dependencies
 
@@ -136,7 +137,7 @@ COOKIE_EXPIRATION_DAYS=30
 PRODUCTION=false
 ```
 
-### 📌 Frontend .env
+📌 Frontend .env
 
 Create a .env file inside the frontend folder:
 ```
