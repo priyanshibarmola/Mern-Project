@@ -4,9 +4,6 @@ A full-stack ecommerce web application built using the **MERN stack (MongoDB, Ex
 
 This project provides a complete online shopping experience for users and a powerful admin dashboard for managing products, orders, and customers.
 
-🌐 Live Demo (optional): https://mernchat.in  
-📌 Related Project: End-to-End Encrypted Chat Application using Next.js, Prisma, PostgreSQL, Express, Socket.io
-
 ---
 
 ## ✨ Features
@@ -106,17 +103,22 @@ cd mern-ecommerce
 
 ### Backend Setup
 
-bash
+```bash
 cd backend
 npm install
-Frontend Setup
+```
+
+### Frontend Setup
+```
 cd frontend
 npm install
-🔐 Environment Variables Setup
+```
+
+###🔐 Environment Variables Setup
 📌 Backend .env
 
 Create a .env file inside the backend folder and add the following:
-
+```
 MONGO_URI=mongodb://localhost:27017/mern-ecommerce
 
 ORIGIN=http://localhost:3000
@@ -132,57 +134,60 @@ PASSWORD_RESET_TOKEN_EXPIRATION=2m
 COOKIE_EXPIRATION_DAYS=30
 
 PRODUCTION=false
-📌 Frontend .env
+```
+
+###📌 Frontend .env
 
 Create a .env file inside the frontend folder:
-
+```
 REACT_APP_BASE_URL=http://localhost:8000
+```
+
 🌱 Database Seeding (Optional but Recommended)
 
 Populate the database with sample data for quick testing:
-
+```
 cd backend
 npm run seed
-
+```
 This will add:
 
-Demo users
-Products
-Reviews
-Cart data
-Orders
-▶️ Running the Project
+- Demo users
+- Products
+- Reviews
+- Cart data
+- Orders
+  
+###▶️ Running the Project
 🚀 Start Backend Server
+```
 cd backend
 npm run dev
-
+```
 Backend runs at:
-
+```
 http://localhost:8000
+```
 🌐 Start Frontend Server
+```
 cd frontend
 npm start
+```
 
 Frontend runs at:
-
+```
 http://localhost:3000
-🔑 Demo Login Credentials
+```
+###🔑 Demo Login Credentials
 
 Use the following account to explore the application:
-
+```
 Email: demo@gmail.com
 Password: helloWorld@123
-⚠️ Important Notes
-OTP verification is disabled for demo account
-Password reset will not work for demo account
-Use a real email for full authentication testing
-Never upload .env files to GitHub
-Ensure MongoDB is running before starting backend
-🌍 Application URLs
-Service	URL
-Frontend	http://localhost:3000
-Backend	http://localhost:8000
+```
+
 📁 Project Structure Overview
+```
 mern-ecommerce/
 │
 ├── backend/
@@ -202,3 +207,4 @@ mern-ecommerce/
 │   └── public/
 │
 └── README.md
+```
