@@ -209,3 +209,5 @@ mern-ecommerce/
 │
 └── README.md
 ```
+### 📁 Screenshot
+<img width="1907" height="860" alt="स्क्रीनशॉट 2026-06-15 125713" src="https://github.com/user-attachments/assets/341306d0-b45d-41d8-b220-38efabb8a0de" />
