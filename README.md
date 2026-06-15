@@ -114,7 +114,7 @@ cd frontend
 npm install
 ```
 
-###🔐 Environment Variables Setup
+### 🔐 Environment Variables Setup
 📌 Backend .env
 
 Create a .env file inside the backend folder and add the following:
@@ -136,7 +136,7 @@ COOKIE_EXPIRATION_DAYS=30
 PRODUCTION=false
 ```
 
-###📌 Frontend .env
+### 📌 Frontend .env
 
 Create a .env file inside the frontend folder:
 ```
@@ -158,7 +158,7 @@ This will add:
 - Cart data
 - Orders
   
-###▶️ Running the Project
+### ▶️ Running the Project
 🚀 Start Backend Server
 ```
 cd backend
@@ -178,7 +178,7 @@ Frontend runs at:
 ```
 http://localhost:3000
 ```
-###🔑 Demo Login Credentials
+### 🔑 Demo Login Credentials
 
 Use the following account to explore the application:
 ```
@@ -186,7 +186,7 @@ Email: demo@gmail.com
 Password: helloWorld@123
 ```
 
-📁 Project Structure Overview
+### 📁 Project Structure Overview
 ```
 mern-ecommerce/
 │
