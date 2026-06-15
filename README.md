@@ -1,70 +1,204 @@
-# Getting Started with Create React App
+# 🛒 MERN Ecommerce – Seamless Shopping Experience
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack ecommerce web application built using the **MERN stack (MongoDB, Express.js, React, Node.js)** with **Redux Toolkit** for state management and **Material UI** for a modern and responsive user interface.
 
-## Available Scripts
+This project provides a complete online shopping experience for users and a powerful admin dashboard for managing products, orders, and customers.
 
-In the project directory, you can run:
+🌐 Live Demo (optional): https://mernchat.in  
+📌 Related Project: End-to-End Encrypted Chat Application using Next.js, Prisma, PostgreSQL, Express, Socket.io
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## ✨ Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 👤 User Features
 
-### `npm test`
+**🛍 Product Reviews**
+- Add, edit, and delete product reviews
+- Real-time rating updates
+- Dynamic star-based rating calculation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**❤️ Wishlist System**
+- Save favorite products
+- Add personal notes to wishlist items
+- Remove items anytime
 
-### `npm run build`
+**🛒 Shopping Cart**
+- Add/remove products
+- Update quantity dynamically
+- View subtotal and total price instantly
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**📦 Order Management**
+- Place orders securely
+- Track order history
+- View order status updates
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**👤 Profile Management**
+- Update username and email
+- Manage multiple shipping addresses
+- View personal order history
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+### 🧑‍💼 Admin Features
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**📦 Product Management**
+- Add new products
+- Edit existing products
+- Soft delete products
+- Manage stock availability and attributes
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**📊 Order Management**
+- View all customer orders
+- Update order status (Processing, Shipped, Delivered, Cancelled)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 🔐 Authentication & Security
 
-## Learn More
+- JWT-based authentication system
+- Secure login & signup
+- OTP verification system
+- Password reset functionality via email
+- Protected routes for users and admins
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 🎨 UI/UX Design
 
-### Code Splitting
+- Built using Material UI components
+- Fully responsive design (mobile + desktop)
+- Clean and modern interface
+- Smooth navigation and transitions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+### ⚙️ System Architecture
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Scalable MERN architecture
+- RESTful API design
+- Redux Toolkit for efficient state management
+- Modular backend structure (controllers, routes, models)
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🚀 Project Setup Guide
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📌 Prerequisites
 
-### Deployment
+Make sure you have the following installed:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Node.js (v18 or later recommended)
+- MongoDB (local or cloud like MongoDB Atlas)
+- npm or yarn package manager
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📥 Clone the Repository
+
+```bash
+git clone https://github.com/your-username/mern-ecommerce.git
+cd mern-ecommerce
+
+## 📦 Install Dependencies
+
+### Backend Setup
+
+```bash
+cd backend
+npm install
+Frontend Setup
+cd frontend
+npm install
+🔐 Environment Variables Setup
+📌 Backend .env
+
+Create a .env file inside the backend folder and add the following:
+
+MONGO_URI=mongodb://localhost:27017/mern-ecommerce
+
+ORIGIN=http://localhost:3000
+
+EMAIL=your-email@example.com
+PASSWORD=your-email-password
+
+SECRET_KEY=your-secret-key
+
+LOGIN_TOKEN_EXPIRATION=30d
+OTP_EXPIRATION_TIME=120000
+PASSWORD_RESET_TOKEN_EXPIRATION=2m
+COOKIE_EXPIRATION_DAYS=30
+
+PRODUCTION=false
+📌 Frontend .env
+
+Create a .env file inside the frontend folder:
+
+REACT_APP_BASE_URL=http://localhost:8000
+🌱 Database Seeding (Optional but Recommended)
+
+Populate the database with sample data for quick testing:
+
+cd backend
+npm run seed
+
+This will add:
+
+Demo users
+Products
+Reviews
+Cart data
+Orders
+▶️ Running the Project
+🚀 Start Backend Server
+cd backend
+npm run dev
+
+Backend runs at:
+
+http://localhost:8000
+🌐 Start Frontend Server
+cd frontend
+npm start
+
+Frontend runs at:
+
+http://localhost:3000
+🔑 Demo Login Credentials
+
+Use the following account to explore the application:
+
+Email: demo@gmail.com
+Password: helloWorld@123
+⚠️ Important Notes
+OTP verification is disabled for demo account
+Password reset will not work for demo account
+Use a real email for full authentication testing
+Never upload .env files to GitHub
+Ensure MongoDB is running before starting backend
+🌍 Application URLs
+Service	URL
+Frontend	http://localhost:3000
+Backend	http://localhost:8000
+📁 Project Structure Overview
+mern-ecommerce/
+│
+├── backend/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── middleware/
+│   ├── seed/
+│   └── server.js
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── redux/
+│   │   └── App.js
+│   └── public/
+│
+└── README.md
