@@ -98,7 +98,7 @@ Make sure you have the following installed:
 
 ## 📥 Clone the Repository
 
-```bash
+bash
 git clone https://github.com/your-username/mern-ecommerce.git
 cd mern-ecommerce
 
@@ -106,7 +106,7 @@ cd mern-ecommerce
 
 ### Backend Setup
 
-```bash
+bash
 cd backend
 npm install
 Frontend Setup
