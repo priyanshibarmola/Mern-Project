@@ -59,7 +59,7 @@ export const AdminOrders = () => {
   }
 
 
-  const editOptions=['Pending','Dispatched','Out for delivery','Delivered','Cancelled']
+  const editOptions=['Pending','Dispatched','Out for delivery','Cancelled']
 
   const getStatusColor=(status)=>{
     if(status==='Pending'){
