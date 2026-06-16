@@ -4,22 +4,23 @@ import React, { useEffect, useState } from 'react'
 import { Cart } from '../../cart/components/Cart'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
-import { addAddressAsync, selectAddressStatus, selectAddresses } from '../../address/AddressSlice'
+import { addAddressAsync, fetchAddressByUserIdAsync, selectAddressStatus, selectAddresses } from '../../address/AddressSlice'
 import { selectLoggedInUser } from '../../auth/AuthSlice'
 import { Link, useNavigate } from 'react-router-dom'
-import { createOrderAsync, selectCurrentOrder, selectOrderStatus } from '../../order/OrderSlice'
+import { createOrderAsync, resetCurrentOrder, selectCurrentOrder, selectOrderStatus } from '../../order/OrderSlice'
 import { resetCartByUserIdAsync, selectCartItems } from '../../cart/CartSlice'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { SHIPPING, TAXES } from '../../../constants'
 import {motion} from 'framer-motion'
+import { toast } from 'react-toastify'
 
 
 export const Checkout = () => {
 
     const status=''
     const addresses=useSelector(selectAddresses)
-    const [selectedAddress,setSelectedAddress]=useState(addresses[0])
-    const [selectedPaymentMethod,setSelectedPaymentMethod]=useState('cash')
+    const [selectedAddress,setSelectedAddress]=useState(null)
+    const [selectedPaymentMethod,setSelectedPaymentMethod]=useState('COD')
     const { register, handleSubmit, watch, reset,formState: { errors }} = useForm()
     const dispatch=useDispatch()
     const loggedInUser=useSelector(selectLoggedInUser)
@@ -32,6 +33,18 @@ export const Checkout = () => {
     const theme=useTheme()
     const is900=useMediaQuery(theme.breakpoints.down(900))
     const is480=useMediaQuery(theme.breakpoints.down(480))
+
+    useEffect(()=>{
+        if(loggedInUser?._id){
+            dispatch(fetchAddressByUserIdAsync(loggedInUser._id))
+        }
+    },[loggedInUser])
+
+    useEffect(()=>{
+        if(!selectedAddress && addresses?.length>0){
+            setSelectedAddress(addresses[0])
+        }
+    },[addresses])
     
     useEffect(()=>{
         if(addressStatus==='fulfilled'){
@@ -45,9 +58,16 @@ export const Checkout = () => {
     useEffect(()=>{
         if(currentOrder && currentOrder?._id){
             dispatch(resetCartByUserIdAsync(loggedInUser?._id))
+            dispatch(resetCurrentOrder())
             navigate(`/order-success/${currentOrder?._id}`)
         }
     },[currentOrder])
+
+    useEffect(()=>{
+        if(orderStatus==='rejected'){
+            toast.error("Error placing your order, please try again later")
+        }
+    },[orderStatus])
     
     const handleAddAddress=(data)=>{
         const address={...data,user:loggedInUser._id}
@@ -55,7 +75,11 @@ export const Checkout = () => {
     }
 
     const handleCreateOrder=()=>{
-        const order={user:loggedInUser._id,item:cartItems,address:selectedAddress,paymentMode:selectedPaymentMethod,total:orderTotal+SHIPPING+TAXES}
+        if(!selectedAddress){
+            toast.error("Please select a shipping address")
+            return
+        }
+        const order={user:loggedInUser._id,item:cartItems,address:[selectedAddress],paymentMode:selectedPaymentMethod,total:orderTotal+SHIPPING+TAXES}
         dispatch(createOrderAsync(order))
     }
 
@@ -128,11 +152,11 @@ export const Checkout = () => {
                 <Grid container gap={2} width={is900?"auto":'50rem'} justifyContent={'flex-start'} alignContent={'flex-start'}>
                         {
                             addresses.map((address,index)=>(
-                                <FormControl item >
-                                    <Stack key={address._id} p={is480?2:2} width={is480?'100%':'20rem'} height={is480?'auto':'15rem'}  rowGap={2} component={is480?Paper:Paper} elevation={1}>
+                                <FormControl item key={address._id}>
+                                    <Stack p={is480?2:2} width={is480?'100%':'20rem'} height={is480?'auto':'15rem'}  rowGap={2} component={is480?Paper:Paper} elevation={1}>
 
                                         <Stack flexDirection={'row'} alignItems={'center'}>
-                                            <Radio checked={selectedAddress===address} name='addressRadioGroup' value={selectedAddress} onChange={(e)=>setSelectedAddress(addresses[index])}/>
+                                            <Radio checked={selectedAddress?._id===address._id} name='addressRadioGroup' onChange={()=>setSelectedAddress(addresses[index])}/>
                                             <Typography>{address.type}</Typography>
                                         </Stack>
 
@@ -161,12 +185,12 @@ export const Checkout = () => {
                     <Stack rowGap={2}>
 
                         <Stack flexDirection={'row'} justifyContent={'flex-start'} alignItems={'center'}>
-                            <Radio value={selectedPaymentMethod} name='paymentMethod' checked={selectedPaymentMethod==='COD'} onChange={()=>setSelectedPaymentMethod('COD')}/>
-                            <Typography>Cash</Typography>
+                            <Radio name='paymentMethod' checked={selectedPaymentMethod==='COD'} onChange={()=>setSelectedPaymentMethod('COD')}/>
+                            <Typography>Cash on delivery</Typography>
                         </Stack>
 
                         <Stack flexDirection={'row'} justifyContent={'flex-start'} alignItems={'center'}>
-                            <Radio value={selectedPaymentMethod} name='paymentMethod' checked={selectedPaymentMethod==='CARD'} onChange={()=>setSelectedPaymentMethod('CARD')}/>
+                            <Radio name='paymentMethod' checked={selectedPaymentMethod==='CARD'} onChange={()=>setSelectedPaymentMethod('CARD')}/>
                             <Typography>Card</Typography>
                         </Stack>
 
