@@ -158,7 +158,7 @@ export const Wishlist = () => {
             <Stack >
 
               {
-                !wishlistFetchStatus==='pending' && wishlistItems?.length===0?(
+                !(wishlistFetchStatus==='pending') && wishlistItems?.length===0?(
                   // empty wishlist animation
                   <Stack minHeight={'60vh'} width={is642?'auto':'40rem'} justifySelf={'center'}  alignSelf={'center'} justifyContent={'center'} alignItems={'center'}>
                     <Lottie animationData={emptyWishlistAnimation}/>
