@@ -109,11 +109,18 @@ export const AdminDashBoard = () => {
 
 
         <Stack rowGap={2} mt={4} >
-            <Typography sx={{cursor:"pointer"}} variant='body2'>Totes</Typography>
-            <Typography sx={{cursor:"pointer"}} variant='body2'>Backpacks</Typography>
-            <Typography sx={{cursor:"pointer"}} variant='body2'>Travel Bags</Typography>
-            <Typography sx={{cursor:"pointer"}} variant='body2'>Hip Bags</Typography>
-            <Typography sx={{cursor:"pointer"}} variant='body2'>Laptop Sleeves</Typography>
+            {
+                categories?.map((category)=>(
+                    <Typography
+                        key={category._id}
+                        onClick={()=>setFilters({...filters,category:[category._id]})}
+                        sx={{cursor:"pointer",textTransform:"capitalize"}}
+                        variant='body2'
+                    >
+                        {category.name.replaceAll('-',' ')}
+                    </Typography>
+                ))
+            }
         </Stack>
 
         {/* brand filters */}
