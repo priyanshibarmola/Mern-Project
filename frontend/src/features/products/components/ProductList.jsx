@@ -1,5 +1,6 @@
 import {FormControl, Grid, IconButton, InputLabel, MenuItem, Select, Stack, Typography, useMediaQuery, useTheme } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProductsAsync, resetProductFetchStatus, selectProductFetchStatus, selectProductIsFilterOpen, selectProductTotalResults, selectProducts, toggleFilters } from '../ProductSlice'
 import { ProductCard } from './ProductCard'
@@ -37,6 +38,7 @@ export const ProductList = () => {
     const [filters,setFilters]=useState({})
     const [page,setPage]=useState(1)
     const [sort,setSort]=useState(null)
+    const [searchParams]=useSearchParams()
     const theme=useTheme()
 
     const is1200=useMediaQuery(theme.breakpoints.down(1200))
@@ -91,6 +93,20 @@ export const ProductList = () => {
             behavior:"instant"
         })
     },[])
+
+    useEffect(()=>{
+        const searchTerm=searchParams.get('search')
+        setFilters((prev)=>{
+            const updated={...prev}
+            if(searchTerm){
+                updated.search=searchTerm
+            }
+            else{
+                delete updated.search
+            }
+            return updated
+        })
+    },[searchParams])
 
     useEffect(()=>{
         setPage(1)
