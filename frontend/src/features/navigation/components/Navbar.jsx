@@ -17,6 +17,7 @@ import { selectLoggedInUser } from '../../auth/AuthSlice';
 import { selectWishlistItems } from '../../wishlist/WishlistSlice';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import TuneIcon from '@mui/icons-material/Tune';
+import SearchIcon from '@mui/icons-material/Search';
 import { selectProductIsFilterOpen, toggleFilters } from '../../products/ProductSlice';
 
 
@@ -34,6 +35,14 @@ export const Navbar=({isProductList=false})=> {
 
   const wishlistItems=useSelector(selectWishlistItems)
   const isProductFilterOpen=useSelector(selectProductIsFilterOpen)
+  const [searchQuery,setSearchQuery]=React.useState('')
+
+  const handleSearchSubmit=(e)=>{
+    e.preventDefault()
+    if(searchQuery.trim()){
+      navigate(`/?search=${encodeURIComponent(searchQuery.trim())}`)
+    }
+  }
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -101,7 +110,30 @@ export const Navbar=({isProductList=false})=> {
                 </MenuItem>
               ))}
             </Menu>
-            <Typography variant='h6' fontWeight={300}>{is480?`${userInfo?.name.toString().split(" ")[0]}`:`Hey👋, ${userInfo?.name}`}</Typography>
+           <Typography variant="h6" noWrap component="a" href="/" sx={{ mr: 2, display: { xs: 'none', md: 'flex' },fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none', }}>
+            MERN SHOP
+          </Typography>
+
+          {
+            !loggedInUser?.isAdmin &&
+            <Stack component={'form'} onSubmit={handleSearchSubmit} sx={{width:is480?"40%":"20rem"}}>
+              <TextField
+                size='small'
+                placeholder='Search products...'
+                value={searchQuery}
+                onChange={(e)=>setSearchQuery(e.target.value)}
+                InputProps={{
+                  endAdornment:(
+                    <InputAdornment position='end'>
+                      <IconButton type='submit' size='small'>
+                        <SearchIcon fontSize='small'/>
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
+              />
+            </Stack>
+          }
             {loggedInUser.isAdmin && <Button variant='contained'>Admin</Button>}
             <Stack sx={{flexDirection:"row",columnGap:"1rem",alignItems:"center",justifyContent:"center"}}>
 
