@@ -21,8 +21,6 @@ export const Reviews = ({productId,averageRating}) => {
     const loggedInUser=useSelector(selectLoggedInUser)
     const reviewStatus=useSelector(selectReviewStatus)
     const ref=useRef(null)
-    
-
 
     const reviewAddStatus=useSelector(selectReviewAddStatus)
     const reviewDeleteStatus=useSelector(selectReviewDeleteStatus)
@@ -84,10 +82,11 @@ export const Reviews = ({productId,averageRating}) => {
         1:0
     }
 
-    reviews.map((review)=>{
+    const reviewsWithUsers=reviews.filter((review)=>review?.user)
+
+    reviewsWithUsers.forEach((review)=>{
         ratingCounts[review.rating]=ratingCounts[review.rating]+1
     })
-
 
     const handleAddReview=(data)=>{
         const review={...data,rating:value,user:loggedInUser._id,product:productId}
@@ -95,22 +94,19 @@ export const Reviews = ({productId,averageRating}) => {
         setWriteReview(false)
     }
 
-    
-
   return (
         <Stack rowGap={5} alignSelf={"flex-start"}  width={is480?"90vw":is840?"25rem":'40rem'}>
-
 
             <Stack>
                 <Typography gutterBottom variant='h4' fontWeight={400}>Reviews</Typography>
                 {
-                    reviews?.length?(
+                    reviewsWithUsers?.length?(
                         <Stack rowGap={3}>
 
                             <Stack rowGap={1} >
                                 <Typography variant='h2' fontWeight={800}>{averageRating}.0</Typography>
                                 <Rating readOnly value={averageRating}/>
-                                <Typography variant='h6' color={'text.secondary'} >Based on {reviews.length} {reviews.length===1?"Review":"Reviews"}</Typography>
+                                <Typography variant='h6' color={'text.secondary'} >Based on {reviewsWithUsers.length} {reviewsWithUsers.length===1?"Review":"Reviews"}</Typography>
                             </Stack>
 
                             <Stack rowGap={2}>
@@ -118,8 +114,8 @@ export const Reviews = ({productId,averageRating}) => {
                                     [5,4,3,2,1].map((number)=>(
                                         <Stack flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'} columnGap={1}>
                                             <Typography sx={{whiteSpace:"nowrap"}}>{number} star</Typography>
-                                            <LinearProgress sx={{width:"100%",height:"1rem",borderRadius:"4px"}} variant='determinate' value={(ratingCounts[number]/reviews?.length)*100}/>   
-                                            <Typography>{parseInt(ratingCounts[number]/reviews?.length*100)}%</Typography>
+                                            <LinearProgress sx={{width:"100%",height:"1rem",borderRadius:"4px"}} variant='determinate' value={(ratingCounts[number]/reviewsWithUsers?.length)*100}/>   
+                                            <Typography>{parseInt(ratingCounts[number]/reviewsWithUsers?.length*100)}%</Typography>
                                         </Stack>
                                     ))
                                 }
@@ -129,18 +125,14 @@ export const Reviews = ({productId,averageRating}) => {
                     ):(
                         <Typography variant='h6' color={'text.secondary'} fontWeight={400}>{loggedInUser?.isAdmin?"There are no reviews currently":"Be the one to post review first"}</Typography>
                     )
-
                 }
-
-
             </Stack>
 
             {/* reviews mapping */}
             <Stack rowGap={2} >
-                {reviews?.map((review)=>(<ReviewItem key={review._id} id={review._id} userid={review.user._id} comment={review.comment} createdAt={review.createdAt} rating={review.rating} username={review.user.name} />))}
+                {reviewsWithUsers?.map((review)=>(<ReviewItem key={review._id} id={review._id} userid={review.user._id} comment={review.comment} createdAt={review.createdAt} rating={review.rating} username={review.user.name} />))}
             </Stack>
 
-            
             {   
                 // add review form
                 writeReview?
