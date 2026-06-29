@@ -69,7 +69,7 @@ const reviewSlice=createSlice({
             })
             .addCase(fetchReviewsByProductIdAsync.fulfilled,(state,action)=>{
                 state.reviewFetchStatus='fulfilled'
-                state.reviews=action.payload
+                state.reviews=action.payload.filter((review)=>review?.user)
             })
             .addCase(fetchReviewsByProductIdAsync.rejected,(state,action)=>{
                 state.reviewFetchStatus='rejected'
