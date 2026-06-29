@@ -54,8 +54,8 @@ export const ProductDetails = () => {
 
 
 
-    const isProductAlreadyInCart=cartItems.some((item)=>item.product._id===id)
-    const isProductAlreadyinWishlist=wishlistItems.some((item)=>item.product._id===id)
+    const isProductAlreadyInCart=cartItems.some((item)=>item.product?._id===id)
+    const isProductAlreadyinWishlist=wishlistItems.some((item)=>item.product?._id===id)
 
     const productFetchStatus=useSelector(selectProductFetchStatus)
     const reviewFetchStatus=useSelector(selectReviewFetchStatus)
