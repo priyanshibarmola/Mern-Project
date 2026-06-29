@@ -2,7 +2,7 @@
 
 A full-stack e-commerce web application built with **MongoDB, Express, React, and Node.js**. Browse products, add them to your cart or wishlist, check out, track your orders, and leave reviews — with a separate dashboard for admins to manage the whole catalog.
 
-🔗 **Live demo:** [mern-project-kohl-kappa.vercel.app](https://mern-project-kohl-kappa.vercel.app)
+🔗 **Live demo:** [mern-project-kohl-kappa.vercel.app](https://youtu.be/d-RMC1Qg1rQ)
 
 ---
 
