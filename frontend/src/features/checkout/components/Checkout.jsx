@@ -29,7 +29,7 @@ export const Checkout = () => {
     const cartItems=useSelector(selectCartItems)
     const orderStatus=useSelector(selectOrderStatus)
     const currentOrder=useSelector(selectCurrentOrder)
-    const orderTotal=cartItems.reduce((acc,item)=>(item.product.price*item.quantity)+acc,0)
+    const orderTotal=cartItems.filter(item=>item.product!==null).reduce((acc,item)=>(item.product.price*item.quantity)+acc,0)
     const theme=useTheme()
     const is900=useMediaQuery(theme.breakpoints.down(900))
     const is480=useMediaQuery(theme.breakpoints.down(480))
