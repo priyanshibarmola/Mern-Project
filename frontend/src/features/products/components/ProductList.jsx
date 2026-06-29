@@ -135,7 +135,7 @@ export const ProductList = () => {
         }
 
         else if(!e.target.checked){
-            const index=wishlistItems.findIndex((item)=>item.product._id===productId)
+            const index=wishlistItems.findIndex((item)=>item.product?._id===productId)
             dispatch(deleteWishlistItemByIdAsync(wishlistItems[index]._id));
         }
     }
