@@ -26,11 +26,11 @@ exports.getByProductId=async(req,res)=>{
             limit=pageSize
         }
 
-        const totalDocs=await Review.find({product:id}).countDocuments().exec()
         const result=await Review.find({product:id}).skip(skip).limit(limit).populate('user').exec()
+        const reviewsWithUsers=result.filter((review)=>review.user)
 
-        res.set("X-total-Count",totalDocs)
-        res.status(200).json(result)
+        res.set("X-total-Count",reviewsWithUsers.length)
+        res.status(200).json(reviewsWithUsers)
 
     } catch (error) {
         console.log(error);
