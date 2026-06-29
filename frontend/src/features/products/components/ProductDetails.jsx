@@ -163,7 +163,7 @@ export const ProductDetails = () => {
         }
 
         else if(!e.target.checked){
-            const index=wishlistItems.findIndex((item)=>item.product._id===id)
+            const index=wishlistItems.findIndex((item)=>item.product?._id===id)
             dispatch(deleteWishlistItemByIdAsync(wishlistItems[index]._id));
         }
     }
